@@ -52,8 +52,8 @@ except serial.serialutil.SerialException:
 
 temp_line = ser.readline()
 temp_words = string.split(temp_line,", ")
-if len(temp_words)<15:
-    ser.write('qe'+chr(13)) #includes quaternion and euler angles in serial data
+# if len(temp_words)<15:
+#     ser.write('qe'+chr(13)) #includes quaternion and euler angles in serial data
 
 rospy.loginfo("Flushing first 200 IMU entries...")
 for x in range(0, 200):
@@ -66,9 +66,9 @@ while not rospy.is_shutdown():
     words = string.split(line,", ")    # Fields split
     
     #yaw, pitch and roll in rad
-    yaw = float(words[16])*degrees2rad
-    pitch = float(words[14])*degrees2rad
-    roll = float(words[15])*degrees2rad
+#     yaw = float(words[16])*degrees2rad
+#     pitch = float(words[14])*degrees2rad
+#     roll = float(words[15])*degrees2rad
 
     #linear acceleration in m/s^2
     imuMsg.linear_acceleration.x = float(words[1]) * accel_factor
@@ -81,10 +81,10 @@ while not rospy.is_shutdown():
     imuMsg.angular_velocity.z = float(words[6]) * degrees2rad
 
     #quaternions
-    imuMsg.orientation.x = float(words[11])
-    imuMsg.orientation.y = float(words[12])
-    imuMsg.orientation.z = float(words[13])
-    imuMsg.orientation.w = float(words[10])
+#     imuMsg.orientation.x = float(words[11])
+#     imuMsg.orientation.y = float(words[12])
+#     imuMsg.orientation.z = float(words[13])
+#     imuMsg.orientation.w = float(words[10])
     
     imuMsg.header.stamp= rospy.Time.now()
     imuMsg.header.frame_id = 'base_imu_link'
@@ -102,12 +102,12 @@ while not rospy.is_shutdown():
         diag_msg.name = 'Razor_Imu'
         diag_msg.level = DiagnosticStatus.OK
         diag_msg.message = 'Received AHRS measurement'
-        diag_msg.values.append(KeyValue('roll (deg)',
-                                str(roll*(180.0/math.pi))))
-        diag_msg.values.append(KeyValue('pitch (deg)',
-                                str(pitch*(180.0/math.pi))))
-        diag_msg.values.append(KeyValue('yaw (deg)',
-                                str(yaw*(180.0/math.pi))))
+#         diag_msg.values.append(KeyValue('roll (deg)',
+#                                 str(roll*(180.0/math.pi))))
+#         diag_msg.values.append(KeyValue('pitch (deg)',
+#                                 str(pitch*(180.0/math.pi))))
+#         diag_msg.values.append(KeyValue('yaw (deg)',
+#                                 str(yaw*(180.0/math.pi))))
         diag_msg.values.append(KeyValue('sequence number', str(seq)))
         diag_arr.status.append(diag_msg)
         diag_pub.publish(diag_arr)
