@@ -9,7 +9,7 @@ import sys
 from sensor_msgs.msg import Imu
 from diagnostic_msgs.msg import DiagnosticArray, DiagnosticStatus, KeyValue
 
-rospy.init_node("test_node")
+rospy.init_node("imu_node")
 #We only care about the most recent measurement, i.e. queue_size=1
 pub = rospy.Publisher('imu', Imu, queue_size=1)
 diag_pub = rospy.Publisher('diagnostics', DiagnosticArray, queue_size=1)
