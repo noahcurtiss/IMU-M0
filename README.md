@@ -24,13 +24,29 @@ source devel/setup.bash
 **Create ROS Package**
 ```sh
 cd ~/catkin_ws/src
-catkin_create_pkg imu std_msgs rospy
+catkin_create_pkg imu_pkg std_msgs rospy
 cd ~/catkin_ws
 catkin_make
 . ~/catkin_ws/devel/setup.bash
 ```
 
-Add ros_imu.py and display_3D_visualization.py to the package. Run catkin_make and source your workspace's setup file. Edit the python scripts with the correct port name. With the IMU connected to the computer and running the firmware, run ros_imu.py. To see a text output, echo the topic "imu". To see a 3D visualization, run display_3D_visualization.py.
+Add ros_imu.py and display_3D_visualization.py to the package under imu_pkg/src/scripts (you may need to create the scripts folder). Edit the python scripts with the correct port name. Make the scripts executable:
+```sh
+chmod +x ~/catkin_ws/src/imu_pkg/scripts/ros_imu.py
+```
+
+**Viewing with ros_imu**
+With the IMU connected to the computer and running the firmware, run ros_imu.py. To see a text output, echo the topic "imu". To see a 3D visualization, run display_3D_visualization.py  
+Run  ```roscore```
+```sh
+catkin_make
+source devel/setup.bash
+rosrun imu_pkg ros_imu.py
+```
+To view imu data, in a separate terminal:
+```sh
+rostopic echo imu
+```
 
 ## Troubleshooting
 There is a known issue with the IMU in that the internal euler and qaternion calculator creates random spikes in the data. To avoid this, be sure that these calculations are disabled by checking the serial moniter and sending the command "qe" to toggle them on or off. If SparkFun fixes the issue, or if you don't care about the data spikes, there is commented code in ros_imu.py that reads the quaternions and euler angles from the IMU. Until then, a method of calculating these values within the python script will need to be added. Without these values, display_3D_visualization.py, and many other processes, will not run.
