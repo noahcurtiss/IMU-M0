@@ -35,7 +35,7 @@ Add ros_imu.py and display_3D_visualization.py to the package under imu_pkg/src/
 chmod +x ~/catkin_ws/src/imu_pkg/scripts/ros_imu.py
 ```
 
-**Viewing with ros_imu**
+**Viewing with ros_imu**  
 With the IMU connected to the computer and running the firmware, run ros_imu.py. To see a text output, echo the topic "imu". To see a 3D visualization, run display_3D_visualization.py  
 Run  ```roscore```
 ```sh
