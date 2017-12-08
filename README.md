@@ -12,6 +12,7 @@ sudo chmod -R 755 FILENAME
 
 ## Viewing with ROS
 Create, build, and source a ROS new package dependent on rospy and std_msgs:  
+
 **Create Catkin Workspace**
 ```sh
 source /opt/ros/kinetic/setup.bash
