@@ -43,11 +43,15 @@ catkin_make
 source devel/setup.bash
 rosrun imu_pkg ros_imu.py
 ```
-To view imu data, in a separate terminal:
+To view imu data, enter the following in a separate terminal while ros_imu is running:
 ```sh
 rostopic echo imu
 ```
+To see a 3D visualization, enter the following in a seperate terminal while ros_imu.py is running:
+```
+rosrun display_3D_visualization.py
+```
 
 ## Troubleshooting
-There is a known issue with the IMU in that the internal euler and qaternion calculator creates random spikes in the data. To avoid this, be sure that these calculations are disabled by checking the serial moniter and sending the command "qe" to toggle them on or off. If SparkFun fixes the issue, or if you don't care about the data spikes, there is commented code in ros_imu.py that reads the quaternions and euler angles from the IMU. Until then, a method of calculating these values within the python script will need to be added. Without these values, display_3D_visualization.py, and many other processes, will not run.
+There is a known issue with the IMU in that the internal euler and qaternion calculator creates random spikes in the data. Using just the quaternions seems to produce the minimum amount of spikes. You can control which data the IMU calculates by sending serial commands "q" for quaternions and "e" for euler to toggle them on or off (you can do this in a serial moniter or by editing ros_imu.py with ser.write('q'+chr(13)) ). Code to calculate euler angles from quaternions is commented in ros_imu.py but it is not necessary for the other programs. Sparkfun may fix this issue at some point.
 
