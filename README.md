@@ -49,7 +49,7 @@ rostopic echo imu
 ```
 To see a 3D visualization, enter the following in a seperate terminal while ros_imu.py is running:
 ```
-rosrun display_3D_visualization.py
+rosrun imu_pkg display_3D_visualization.py
 ```
 
 ## Troubleshooting
