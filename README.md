@@ -53,5 +53,5 @@ rosrun imu_pkg display_3D_visualization.py
 ```
 
 ## Troubleshooting
-There is a known issue with the IMU in that the internal euler and qaternion calculator creates random spikes in the data. Using just the quaternions seems to produce the minimum amount of spikes. You can control which data the IMU calculates by sending serial commands "q" for quaternions and "e" for euler to toggle them on or off (you can do this in a serial moniter or by editing ros_imu.py with ser.write('q'+chr(13)) ). Code to calculate euler angles from quaternions is commented in ros_imu.py but it is not necessary for the other programs. Sparkfun may fix this issue at some point.
+There is a known issue with the IMU in that the internal euler and qaternion calculator creates random spikes in the data. Using just the quaternions seems to produce the minimum amount of spikes. You can control which data the IMU calculates by sending serial commands "q" for quaternions and "e" for euler to toggle them on or off (you can do this in a serial moniter or by editing ros_imu.py with `ser.write('q'+chr(13))`). Code to calculate euler angles from quaternions is commented in ros_imu.py but it is not necessary for the other programs. Sparkfun may fix this issue at some point.
 
